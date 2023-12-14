@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>Назаренко Дмитро Володимирович, ІС-з11, лабараторна № 5, варіант № 10</title>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <h2 class="headline">Форма для заповнення</h2>
+        
+        <form id="myForm">
+            <label for="fullName"></label>
+            <input type="text" id="fullName" name="fullName" required pattern="[A-Za-zА-Яа-яЁё\s]+" title="Будь ласка, введіть правильне ПІБ (лише літери та пробіли)."
+                   onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" placeholder="ПІБ">
+        
+            <label for="group"></label>
+            <input type="text" id="group" name="group" required
+                   onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" placeholder="Група">
+        
+            <label for="phone"></label>
+            <input type="tel" id="phone" name="phone" required pattern="\+380\d{9}" title="Будь ласка, введіть правильний номер телефону (+380XXXXXXXXX)."
+                   onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" placeholder="Телефон">
+        
+            <label for="address"></label>
+            <input type="text" id="address" name="address" required
+                   onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" placeholder="Адреса">
+        
+            <label for="telegram"></label>
+            <input type="text" id="telegram" name="telegram" required pattern="[A-Za-z0-9_]+" title="Будь ласка, введіть правильне ім'я користувача Телеграму (лише літери, цифри та підкреслення)."
+                   onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)" placeholder="Телеграм">
+        
+            <br><br>
+            <input type="button" class="button" value="Підтвердити" onclick="validateForm()">
+        </form>
+        
+        <script>
+            function clearPlaceholder(element) {
+                element.placeholder = '';
+            }
+        
+            function restorePlaceholder(element) {
+                if (!element.value) {
+                    element.placeholder = element.getAttribute('placeholder');
+                }
+            }
+        
+            function validateForm() {
+                var form = document.getElementById("myForm");
+                var inputs = form.getElementsByTagName("input");
+        
+                for (var i = 0; i < inputs.length; i++) {
+                    if (!inputs[i].checkValidity()) {
+                        inputs[i].classList.add("error");
+                    } else {
+                        inputs[i].classList.remove("error");
+                    }
+                }
+        
+                if (form.checkValidity()) {
+                    var result = "ПІБ: " + document.getElementById("fullName").value + "\n" +
+                                 "Група: " + document.getElementById("group").value + "\n" +
+                                 "Телефон: " + document.getElementById("phone").value + "\n" +
+                                 "Адреса: " + document.getElementById("address").value + "\n" +
+                                 "Телеграм: " + document.getElementById("telegram").value;
+        
+                    alert(result);
+                }
+            }
+        </script>
+        
+        </body>
+        </html>
